@@ -174,6 +174,14 @@ body{
   text-transform: uppercase;
 }
 
+.error{
+
+  background:linear-gradient(to top,darkred, red,darkred);
+  padding: 0.7em 1.4em;
+  border-radius: var(--radius);
+  color: white;
+  
+}
 /* navbar */
 
 
@@ -486,7 +494,9 @@ gap: 1rem;
   font-size: 1rem;
   color: white;
 }
-
+.title-about{
+  color: white;
+}
 /* single cocktail */
 .singleCocktail{
   padding: 2rem 1rem;
@@ -598,6 +608,7 @@ color: var(--clr-prim6);
   min-height: 100vh;
   transform: translateX(-100%);
   transition: var(--transition);
+
 }
 .user-cocktails-show .userCocktails-container{
   transform: translateX(0);
@@ -608,10 +619,11 @@ grid-template-columns: auto 1fr 1fr auto;
 text-align: center;
 align-items: center;
 justify-content: center;
-  padding: 0.3rem 1rem;
-  margin: 1rem 0;
-  border-bottom: 2px solid var(--clr-black);
-  border-top: 2px solid var(--clr-black);
+gap: 1rem;
+padding: 0.3rem 1rem;
+margin: 1rem 0;
+border-bottom: 2px solid var(--clr-black);
+border-top: 2px solid var(--clr-black);
 
 }
 .user-cocktail-img{

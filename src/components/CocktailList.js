@@ -9,8 +9,8 @@ const CocktailList = () => {
   if (loading) {
     return <Loader />;
   }
-  if (cocktails.length < 1) {
-    return <h2>Sorry no drinks matched your search</h2>;
+  if (cocktails === null) {
+    return <h4 className='error'>Sorry no drinks matched your search.</h4>;
   }
 
   return (

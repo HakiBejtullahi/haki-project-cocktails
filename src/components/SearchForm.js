@@ -5,7 +5,13 @@ const SearchForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  const { setSearchInput, searchInput } = useGlobalContext();
+  const { setSearchInput, searchInput, fetchDrinks } = useGlobalContext();
+
+  const handleSearch = async (e) => {
+    const searchValue = e.target.value;
+
+    setSearchInput(searchValue);
+  };
 
   return (
     <form className='search-form' onSubmit={handleSubmit}>
@@ -14,7 +20,8 @@ const SearchForm = () => {
         type='text'
         id='search'
         value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
+        onChange={handleSearch}
+        placeholder={'margArita'}
       />
     </form>
   );

@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import { useGlobalContext } from '../context';
 
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+const urlSearch = 'www.thecocktaildb.com/api/json/v1/1/search.php?f=';
 
 const SingleDrinks = () => {
   const { id } = useParams();
@@ -116,7 +117,12 @@ const SingleDrinks = () => {
             {ingredients.map((item, index) => {
               return item ? (
                 <li key={index} className='ingredient'>
-                  {item}
+                  <a
+                    href={`https://www.google.com/search?q=${item}`}
+                    target='_blank'
+                  >
+                    {item}
+                  </a>
                 </li>
               ) : null;
             })}
@@ -133,11 +139,12 @@ const SingleDrinks = () => {
                 let btnId = e.target.dataset.id;
                 let inCart = userCocktails.find((item) => item.id === btnId);
                 if (inCart) {
-                  e.target.disabled = true;
+                  alert(
+                    'You have already saved this cocktail in your favorites cocktails. Check favorites for more info about these drinks.'
+                  );
                   return;
                 } else {
                   saveUserCocktails(id, name, image);
-                  e.target.disabled = true;
                 }
                 document
                   .querySelector('.user-cocktails')

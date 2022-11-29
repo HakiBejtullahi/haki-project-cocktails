@@ -25,11 +25,14 @@ const Cocktail = ({ strDrink: name, strDrinkThumb: image, idDrink: id }) => {
           let btnId = e.target.dataset.id;
           let inCart = userCocktails.find((item) => item.id === btnId);
           if (inCart) {
-            e.target.disabled = true;
+            document
+              .querySelector('.user-cocktails')
+              .classList.add('user-cocktails-show');
+
+            alert('<h1>hello</h1>');
             return;
           } else {
             saveUserCocktails(id, name, image);
-            e.target.disabled = true;
           }
           document
             .querySelector('.user-cocktails')

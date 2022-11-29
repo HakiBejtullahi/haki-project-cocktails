@@ -1,7 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 
 const baseUrl =
   'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic';
+
+const searchUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 const AppContext = React.createContext();
 
@@ -29,7 +31,8 @@ const AppProvider = ({ children }) => {
     localStorage.setItem('user-cocktails', JSON.stringify(userCocktails));
   }, [userCocktails]);
 
-  const fetchDrinks = async () => {
+  const fetchDrinks = useCallback(async () => {
+    setLoading(true);
     setLoading(true);
     try {
       const resp = await fetch(baseUrl);
@@ -40,13 +43,28 @@ const AppProvider = ({ children }) => {
       console.log(error);
       setLoading(false);
     }
-  };
+  });
+  const fetchSearchDrinks = useCallback(async () => {
+    try {
+      const resp = await fetch(`${searchUrl}${searchInput}`);
+      const data = await resp.json();
+      setCocktails(data.drinks);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  });
   useEffect(() => {
     fetchDrinks();
   }, []);
+  useEffect(() => {
+    fetchSearchDrinks();
+  }, [searchInput]);
   return (
     <AppContext.Provider
       value={{
+        fetchDrinks,
         searchInput,
         setSearchInput,
         saveUserCocktails,
