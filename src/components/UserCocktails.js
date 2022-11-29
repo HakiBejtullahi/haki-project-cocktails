@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useGlobalContext } from '../context';
 import { Link } from 'react-router-dom';
 import SingleDrinks from '../pages/SingleDrinks';
+import { FaArrowAltCircleLeft } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const UserCocktails = () => {
@@ -12,20 +13,20 @@ const UserCocktails = () => {
     const newUserCocktails = userCocktails.filter((item) => item.id !== id);
     setUserCocktails(newUserCocktails);
   };
+  const closeSidebar = () => {
+    const sidebar = document.querySelector('.user-cocktails');
+
+    if (sidebar.classList.contains('user-cocktails-show')) {
+      sidebar.classList.remove('user-cocktails-show');
+    }
+  };
 
   return (
     <aside className='user-cocktails'>
       <div className='userCocktails-container'>
         <h2>user cocktails</h2>
-        <button
-          className='close-user-cocktails'
-          onClick={() => {
-            document
-              .querySelector('.user-cocktails')
-              .classList.remove('user-cocktails-show');
-          }}
-        >
-          <AiOutlineClose />
+        <button className='close-user-cocktails' onClick={closeSidebar}>
+          <FaArrowAltCircleLeft />
         </button>
 
         {userCocktails.map((item) => {

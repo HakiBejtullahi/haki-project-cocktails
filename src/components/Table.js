@@ -9,7 +9,8 @@ const Table = () => {
           <td>1.0</td>
         </tr>
         <tr>
-          <th>Date Released:</th>
+          <th>Status: </th>
+          <td>Under Development</td>
         </tr>
       </thead>
     </table>
