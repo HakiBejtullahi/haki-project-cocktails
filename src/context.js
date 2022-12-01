@@ -46,17 +46,16 @@ const AppProvider = ({ children }) => {
   });
   const fetchSearchDrinks = useCallback(async () => {
     setLoading(true);
-    if (searchInput !== '') {
-      try {
-        const resp = await fetch(`${searchUrl}${searchInput}`);
-        const data = await resp.json();
-        setCocktails(data.drinks);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    } else return;
+
+    try {
+      const resp = await fetch(`${searchUrl}${searchInput}`);
+      const data = await resp.json();
+      setCocktails(data.drinks);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   });
   useEffect(() => {
     if (!searchInput) {

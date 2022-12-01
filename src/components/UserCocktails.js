@@ -37,20 +37,17 @@ const UserCocktails = () => {
                   alt={item.name}
                   className='user-cocktail-img'
                 />
-                <div className='user-cocktail-info'>
-                  <p>{item.name}</p>
-                  <Link
-                    to={`/cocktail/${item.id}`}
-                    onClick={() => {
-                      document
-                        .querySelector('.user-cocktails')
-                        .classList.remove('user-cocktails-show');
-                    }}
-                    element={<SingleDrinks />}
-                  >
-                    learn more
-                  </Link>
-                </div>
+                <Link
+                  to={`/cocktail/${item.id}`}
+                  onClick={() => {
+                    document
+                      .querySelector('.user-cocktails')
+                      .classList.remove('user-cocktails-show');
+                  }}
+                  element={<SingleDrinks />}
+                >
+                  <p className='user-cocktail-info'>{item.name}</p>
+                </Link>
                 <button onClick={() => deleteCocktail(item.id)}>
                   <AiOutlineClose />
                 </button>

@@ -483,7 +483,7 @@ body {
   background-color: transparent;
   z-index: -5;
   transition: var(--transition);
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 .user-cocktails-show {
@@ -516,28 +516,42 @@ body {
 }
 .user-list {
   padding: 0 0.5rem;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+
+  /* overflow-y: scroll; */
   /* background-color: red */
 }
 .user-cocktail-img {
-  width: 120px;
-  height: 120px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
 }
 .user-cocktail .user-cocktail-info {
+  font-size: 1rem;
+  letter-spacing: var(--spacing1);
+  font-weight: bolder;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 100%;
+  color: var(--clr-prim7);
+  animation: highlight 1.5s ease-in-out infinite;
 }
-.user-cocktail p {
-  font-size: 1rem;
-  font-weight: bolder;
-  letter-spacing: var(--spacing2);
-  color: var(--clr-prim9);
+
+@keyframes highlight {
+  0% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: 3px 3px 5px var(--clr-prim4), 3px -3px 5px var(--clr-prim4),
+      -3px 3px 5px var(--clr-prim4), -3px -3px 5px var(--clr-prim4);
+    color: var(--clr-prim6);
+  }
+  100% {
+    text-shadow: none;
+  }
 }
 .user-cocktail button {
   background-color: transparent;
@@ -546,6 +560,23 @@ body {
   font-weight: bolder;
   color: darkred;
   cursor: pointer;
+  animation: btnRotate 2s infinite;
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+@keyframes btnRotate {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 2px 2px 5px darkred, -2px -2px 5px darkred, -2px 2px 5px darkred,
+      2px -2px 5px darkred;
+    background-color: lightcoral;
+  }
 }
 .user-cocktails .close-user-cocktails {
   background-color: transparent;
@@ -615,6 +646,9 @@ body {
     right: 1rem;
     font-size: 3rem;
     margin-right: 2rem;
+  }
+  .user-cocktail p {
+    font-size: 1.4rem;
   }
 }
 
