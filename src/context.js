@@ -20,6 +20,7 @@ const AppProvider = ({ children }) => {
       return [];
     }
   };
+  console.log(cocktails);
 
   const [userCocktails, setUserCocktails] = useState(getFromLocalStorage());
 
@@ -33,7 +34,6 @@ const AppProvider = ({ children }) => {
 
   const fetchDrinks = useCallback(async () => {
     setLoading(true);
-    setLoading(true);
     try {
       const resp = await fetch(baseUrl);
       const data = await resp.json();
@@ -45,21 +45,28 @@ const AppProvider = ({ children }) => {
     }
   });
   const fetchSearchDrinks = useCallback(async () => {
-    try {
-      const resp = await fetch(`${searchUrl}${searchInput}`);
-      const data = await resp.json();
-      setCocktails(data.drinks);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
+    setLoading(true);
+    if (searchInput !== '') {
+      try {
+        const resp = await fetch(`${searchUrl}${searchInput}`);
+        const data = await resp.json();
+        setCocktails(data.drinks);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    } else return;
   });
   useEffect(() => {
-    fetchDrinks();
-  }, []);
+    if (!searchInput) {
+      fetchDrinks();
+    }
+  }, [searchInput]);
   useEffect(() => {
-    fetchSearchDrinks();
+    if (searchInput) {
+      fetchSearchDrinks();
+    }
   }, [searchInput]);
   return (
     <AppContext.Provider

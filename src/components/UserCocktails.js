@@ -28,33 +28,36 @@ const UserCocktails = () => {
         <button className='close-user-cocktails' onClick={closeSidebar}>
           <FaArrowAltCircleLeft />
         </button>
-
-        {userCocktails.map((item) => {
-          return (
-            <article key={item.id} className='user-cocktail'>
-              <img
-                src={item.image}
-                alt={item.name}
-                className='user-cocktail-img'
-              />
-              <p>{item.name}</p>
-              <Link
-                to={`/cocktail/${item.id}`}
-                onClick={() => {
-                  document
-                    .querySelector('.user-cocktails')
-                    .classList.remove('user-cocktails-show');
-                }}
-                element={<SingleDrinks />}
-              >
-                learn more
-              </Link>
-              <button onClick={() => deleteCocktail(item.id)}>
-                <AiOutlineClose />
-              </button>
-            </article>
-          );
-        })}
+        <div className='user-list'>
+          {userCocktails.map((item) => {
+            return (
+              <article key={item.id} className='user-cocktail'>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className='user-cocktail-img'
+                />
+                <div className='user-cocktail-info'>
+                  <p>{item.name}</p>
+                  <Link
+                    to={`/cocktail/${item.id}`}
+                    onClick={() => {
+                      document
+                        .querySelector('.user-cocktails')
+                        .classList.remove('user-cocktails-show');
+                    }}
+                    element={<SingleDrinks />}
+                  >
+                    learn more
+                  </Link>
+                </div>
+                <button onClick={() => deleteCocktail(item.id)}>
+                  <AiOutlineClose />
+                </button>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </aside>
   );
