@@ -20,8 +20,17 @@ const AppProvider = ({ children }) => {
       return [];
     }
   };
-  console.log(cocktails);
 
+  const paginate = (data) => {
+    const itemsPerPage = 12;
+    const numberOfPages = Math.ceil(data.length / itemsPerPage);
+
+    const newCocktails = Array.from({ length: numberOfPages }, (_, index) => {
+      const start = index * itemsPerPage;
+      return data.slice(start, start + itemsPerPage);
+    });
+    return newCocktails;
+  };
   const [userCocktails, setUserCocktails] = useState(getFromLocalStorage());
 
   const saveUserCocktails = (id, name, image) => {
@@ -37,10 +46,11 @@ const AppProvider = ({ children }) => {
     try {
       const resp = await fetch(baseUrl);
       const data = await resp.json();
-      setCocktails(data.drinks);
+
+      setCocktails(paginate(data.drinks));
       setLoading(false);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       setLoading(false);
     }
   });
@@ -50,7 +60,7 @@ const AppProvider = ({ children }) => {
     try {
       const resp = await fetch(`${searchUrl}${searchInput}`);
       const data = await resp.json();
-      setCocktails(data.drinks);
+      setCocktails(paginate(data.drinks));
       setLoading(false);
     } catch (error) {
       console.log(error);

@@ -386,7 +386,45 @@ body {
   letter-spacing: var(--spacing1);
   cursor: pointer;
 }
+.main-center .btn-container {
+  padding: 1rem 0;
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  align-items: center;
+}
+.main-center .page-btn {
+  display: none;
+}
+.main-center .prev-btn,
+.next-btn,
+.page-btn {
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  letter-spacing: var(--spacing1);
+  text-transform: uppercase;
+  background-color: var(--clr-prim7);
+  color: var(--clr-grey3);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-block;
+}
 
+.prev-btn:hover,
+.next-btn:hover,
+.page-btn:hover,
+.active-btn {
+  background-color: var(--clr-prim5);
+  color: var(--clr-grey1);
+}
+@media (min-width: 780px) {
+  .main-center .page-btn {
+    display: inline-block;
+  }
+}
 /* about */
 .about {
   background-color: var(--clr-prim7);
