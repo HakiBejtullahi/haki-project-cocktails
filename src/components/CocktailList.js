@@ -13,6 +13,14 @@ const CocktailList = () => {
   if (cocktails === null) {
     return <h4 className='error'>Sorry no drinks matched your search.</h4>;
   }
+  if (cocktails.length === 0) {
+    return (
+      <h3 className='error'>
+        Unfortunalty the servers of Cocktails API are down at the moment, so
+        until further update this website is currently down.
+      </h3>
+    );
+  }
   const nextPage = () => {
     setPage((oldPage) => {
       let nextPage = oldPage + 1;
@@ -31,7 +39,7 @@ const CocktailList = () => {
       return prevPage;
     });
   };
-
+  console.log(cocktails);
   const handlePage = (index) => {
     setPage(index);
   };

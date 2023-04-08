@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 
-const baseUrl =
-  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic';
+const baseUrl = 'www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic';
 
-const searchUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+const searchUrl =
+  'www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic';
 
 const AppContext = React.createContext();
 
@@ -46,7 +46,7 @@ const AppProvider = ({ children }) => {
     try {
       const resp = await fetch(baseUrl);
       const data = await resp.json();
-
+      console.log(resp);
       setCocktails(paginate(data.drinks));
       setLoading(false);
     } catch (err) {
