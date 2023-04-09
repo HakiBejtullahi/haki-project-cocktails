@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 
-const baseUrl = 'www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic';
+const baseUrl =
+  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic';
 
-const searchUrl =
-  'www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic';
+const searchUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 const AppContext = React.createContext();
 
@@ -43,17 +43,17 @@ const AppProvider = ({ children }) => {
 
   const fetchDrinks = useCallback(async () => {
     setLoading(true);
+
     try {
       const resp = await fetch(baseUrl);
       const data = await resp.json();
-      console.log(resp);
       setCocktails(paginate(data.drinks));
       setLoading(false);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      // console.log(error);
       setLoading(false);
     }
-  });
+  }, [baseUrl]);
   const fetchSearchDrinks = useCallback(async () => {
     setLoading(true);
 
@@ -63,12 +63,12 @@ const AppProvider = ({ children }) => {
       setCocktails(paginate(data.drinks));
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setLoading(false);
     }
   });
   useEffect(() => {
-    if (!searchInput) {
+    if (!searchInput || searchInput === '') {
       fetchDrinks();
     }
   }, [searchInput]);

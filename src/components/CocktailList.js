@@ -39,7 +39,7 @@ const CocktailList = () => {
       return prevPage;
     });
   };
-  console.log(cocktails);
+
   const handlePage = (index) => {
     setPage(index);
   };
